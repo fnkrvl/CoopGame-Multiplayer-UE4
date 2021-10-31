@@ -27,6 +27,10 @@ protected:
 	void MoveRight(float AxisValue);
 	void BeginCrouch();
 	void EndCrouch();
+	void BeginZoom();
+	void EndZoom();
+	void StartFire();
+	void StopFire();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category= "Components")
 	USpringArmComponent* SpringArmComp;
