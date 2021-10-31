@@ -8,6 +8,7 @@
 #include "SCharacter.generated.h"
 
 class UCameraComponent;
+class USpringArmComponent;
 
 UCLASS()
 class COOPGAME_API ASCharacter : public ACharacter
@@ -24,7 +25,12 @@ protected:
 
 	void MoveForward(float AxisValue);	
 	void MoveRight(float AxisValue);
+	void BeginCrouch();
+	void EndCrouch();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category= "Components")
+	USpringArmComponent* SpringArmComp;
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category= "Components")
 	UCameraComponent* CameraComp;
 	
