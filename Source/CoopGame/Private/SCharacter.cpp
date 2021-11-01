@@ -17,6 +17,9 @@ ASCharacter::ASCharacter()
 	
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
 	CameraComp->SetupAttachment(SpringArmComp);
+
+	ZoomedFOV = 65.0f;
+	ZoomInterSpeed = 20;
 }
 
 // Called when the game starts or when spawned
@@ -25,6 +28,8 @@ void ASCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	ACharacter::GetMovementComponent()->GetNavAgentPropertiesRef().bCanCrouch = true;
+
+	DefaultFOV = CameraComp->FieldOfView;
 	
 }
 
@@ -50,10 +55,12 @@ void ASCharacter::EndCrouch()
 
 void ASCharacter::BeginZoom()
 {
+	bWantsToZoom = true;
 }
 
 void ASCharacter::EndZoom()
 {
+	bWantsToZoom = false;
 }
 
 void ASCharacter::StartFire()
@@ -70,6 +77,10 @@ void ASCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	const float TargetFOV = bWantsToZoom ? ZoomedFOV : DefaultFOV;
+	const float NewFOV = FMath::FInterpTo(CameraComp->FieldOfView, TargetFOV, DeltaTime, ZoomInterSpeed);
+	
+	CameraComp->SetFieldOfView(NewFOV);
 }
 
 // Called to bind functionality to input

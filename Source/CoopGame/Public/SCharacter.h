@@ -40,6 +40,17 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category= "Components")
 	UCameraComponent* CameraComp;
+
+	bool bWantsToZoom;
+
+	UPROPERTY(EditDefaultsOnly, Category= "Player")
+	float ZoomedFOV;
+
+	UPROPERTY(EditDefaultsOnly, Category= "Player", meta = (ClampMin = 0.1, ClampMax = 100))
+	float ZoomInterSpeed;
+
+	/* Default FOV set during begin play */
+	float DefaultFOV;
 	
 public:	
 	// Called every frame
