@@ -2,7 +2,6 @@
 
 
 #include "SCharacter.h"
-
 #include "GameFramework/PawnMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
@@ -15,12 +14,9 @@ ASCharacter::ASCharacter()
 	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
 	SpringArmComp->bUsePawnControlRotation = true;
 	SpringArmComp->SetupAttachment(RootComponent);
-
-    
-
+	
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
 	CameraComp->SetupAttachment(SpringArmComp);
-	
 }
 
 // Called when the game starts or when spawned
@@ -62,6 +58,7 @@ void ASCharacter::EndZoom()
 
 void ASCharacter::StartFire()
 {
+	
 }
 
 void ASCharacter::StopFire()
@@ -96,7 +93,17 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("Fire", IE_Released, this, &ASCharacter::StopFire);
 
 	// CHALLENGE CODE
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ASCharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ASCharacter::Jump);
 
 }
 
+
+FVector ASCharacter::GetPawnViewLocation() const
+{
+	if (CameraComp)
+	{
+		return  CameraComp->GetComponentLocation();
+	}
+
+	return Super::GetPawnViewLocation();
+}

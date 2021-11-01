@@ -25,13 +25,16 @@ protected:
 
 	void MoveForward(float AxisValue);	
 	void MoveRight(float AxisValue);
+	
 	void BeginCrouch();
 	void EndCrouch();
+	
 	void BeginZoom();
 	void EndZoom();
+	
 	void StartFire();
 	void StopFire();
-
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category= "Components")
 	USpringArmComponent* SpringArmComp;
 	
@@ -44,5 +47,6 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
+	virtual FVector GetPawnViewLocation() const override;
 };
