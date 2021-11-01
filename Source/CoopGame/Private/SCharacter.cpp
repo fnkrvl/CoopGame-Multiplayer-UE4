@@ -32,7 +32,7 @@ void ASCharacter::BeginPlay()
 
 	ACharacter::GetMovementComponent()->GetNavAgentPropertiesRef().bCanCrouch = true;	
 	
-	DefaultFOV = CameraComp->FieldOfView;
+	//DefaultFOV = CameraComp->FieldOfView;
 
 	// Spawn a default weapon
 	FActorSpawnParameters SpawnParams;
@@ -76,11 +76,19 @@ void ASCharacter::EndZoom()
 	bWantsToZoom = false;
 }
 
-void ASCharacter::Fire()
+void ASCharacter::StartFire()
 {
 	if (CurrentWeapon)
 	{
-		CurrentWeapon->Fire();
+		CurrentWeapon->StartFire();
+	}
+}
+
+void ASCharacter::StopFire()
+{
+	if (CurrentWeapon)
+	{
+		CurrentWeapon->StopFire();
 	}
 }
 
@@ -89,10 +97,10 @@ void ASCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	const float TargetFOV = bWantsToZoom ? ZoomedFOV : DefaultFOV;
-	const float NewFOV = FMath::FInterpTo(CameraComp->FieldOfView, TargetFOV, DeltaTime, ZoomInterSpeed);
+	//const float TargetFOV = bWantsToZoom ? ZoomedFOV : DefaultFOV;
+	//const float NewFOV = FMath::FInterpTo(CameraComp->FieldOfView, TargetFOV, DeltaTime, ZoomInterSpeed);
 	
-	CameraComp->SetFieldOfView(NewFOV);
+	//CameraComp->SetFieldOfView(NewFOV);
 }
 
 // Called to bind functionality to input
@@ -112,7 +120,8 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("Zoom", IE_Pressed, this, &ASCharacter::BeginZoom);
 	PlayerInputComponent->BindAction("Zoom", IE_Released, this, &ASCharacter::EndZoom);
 
-	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ASCharacter::Fire);
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ASCharacter::StartFire);
+	PlayerInputComponent->BindAction("Fire", IE_Released, this, &ASCharacter::StopFire);
 
 	// CHALLENGE CODE
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ASCharacter::Jump);
