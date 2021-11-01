@@ -3,12 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "SWeapon.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "SCharacter.generated.h"
 
 class UCameraComponent;
 class USpringArmComponent;
+class ASWeapon;
 
 UCLASS()
 class COOPGAME_API ASCharacter : public ACharacter
@@ -29,12 +31,6 @@ protected:
 	void BeginCrouch();
 	void EndCrouch();
 	
-	void BeginZoom();
-	void EndZoom();
-	
-	void StartFire();
-	void StopFire();
-	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category= "Components")
 	USpringArmComponent* SpringArmComp;
 	
@@ -51,6 +47,20 @@ protected:
 
 	/* Default FOV set during begin play */
 	float DefaultFOV;
+
+	void BeginZoom();
+	void EndZoom();
+
+	UPROPERTY()
+	ASWeapon* CurrentWeapon;
+
+	UPROPERTY(EditDefaultsOnly, Category= "Player")
+	TSubclassOf<ASWeapon> StarterWeaponClass;
+
+	UPROPERTY(VisibleAnywhere, Category= "Player")
+	FName WeaponAttachSocketName;
+	
+	void Fire();	
 	
 public:	
 	// Called every frame
