@@ -10,6 +10,23 @@ class USkeletalMeshComponent;
 class UDamageType;
 class UParticleSystem;
 
+// Contains information of a single hitscan weapon linetrace
+USTRUCT()
+struct FHitScanTrace
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY()
+	TEnumAsByte<EPhysicalSurface> SurfaceType;
+
+	UPROPERTY()
+	FVector_NetQuantize TraceTo;
+};
+
+
+
 UCLASS()
 class COOPGAME_API ASWeapon : public AActor
 {
@@ -26,7 +43,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category= "Components")
 	USkeletalMeshComponent* MeshComp;	
 
-	void PlayFireEffects(FVector TracerEnd);
+	void PlayFireEffects(FVector TracerEnd) const;
+
+	void PlayImpactEffects(EPhysicalSurface SurfaceType, FVector ImpactPoint);
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category= "Weapon")
 	TSubclassOf<UDamageType> DamageType;
@@ -57,6 +76,12 @@ protected:
 
 	virtual void Fire();
 
+	// Whenever we call server fire in our code, it will not run run on a client, but it will instead pushed his request to the hosting server
+	// It's guaranteed to eventually get to the server
+	// Required when you specify the server
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerFire();
+
 	FTimerHandle TimerHandle_TimeBetweenShots;
 
 	float LastFireTime;
@@ -67,11 +92,14 @@ protected:
 
 	// Derived from RateOfFire
 	float TimeBetweenShots;
-	
-public:	
 
+	UPROPERTY(ReplicatedUsing=OnRep_HitScanTrace)
+	FHitScanTrace HitScanTrace;
+
+	UFUNCTION()
+	void OnRep_HitScanTrace();
 	
-	
+public:		
 
 	void StartFire();
 
