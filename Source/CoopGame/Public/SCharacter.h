@@ -40,6 +40,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category= "Components")
 	UCameraComponent* CameraComp;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category= "Components")
 	USHealthComponent* HealthComp;
 
 	bool bWantsToZoom;
