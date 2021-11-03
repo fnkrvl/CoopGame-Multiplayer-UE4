@@ -74,7 +74,7 @@ protected:
 						 class AController* InstigatedBy, AActor* DamageCauser);
 
 	/* Pawn died previously */
-	UPROPERTY(BlueprintReadOnly, Category= "Player")
+	UPROPERTY(Replicated, BlueprintReadOnly, Category= "Player")
 	bool bDied;
 	
 public:	
