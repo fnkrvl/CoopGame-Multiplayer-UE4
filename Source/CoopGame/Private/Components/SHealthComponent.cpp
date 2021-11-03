@@ -59,7 +59,7 @@ void USHealthComponent::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > &
 	
 	DOREPLIFETIME(USHealthComponent, Health);
 
-	//DOREPLIFETIME_CONDITION(ASCharacter, CurrentWeapon, COND_OwnerOnly);
+	//DOREPLIFETIME_CONDITION(USHealthComponent, Health, COND_OwnerOnly);
 }
 
 
