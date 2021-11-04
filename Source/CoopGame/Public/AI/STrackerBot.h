@@ -23,6 +23,18 @@ protected:
 	UStaticMeshComponent* MeshComp;
 
 	FVector GetNextPathPoint();
+
+	// Next point in navigation path
+	FVector NextPathPoint;
+
+	UPROPERTY(EditDefaultsOnly, Category= "TrackerBot")
+	float MovementForce;
+
+	UPROPERTY(EditDefaultsOnly, Category= "TrackerBot")
+	bool bUseVelocityChange;
+
+	UPROPERTY(EditDefaultsOnly, Category= "TrackerBot")
+	float RequiredDistanceToTarget;
 	
 public:	
 	// Called every frame
