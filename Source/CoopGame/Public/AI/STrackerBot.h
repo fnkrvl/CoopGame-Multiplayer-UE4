@@ -45,6 +45,10 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category= "TrackerBot")
 	float RequiredDistanceToTarget;
+
+	// Dynamic material to pulse on damage
+	UPROPERTY()
+	UMaterialInstanceDynamic* MatInst;
 	
 public:	
 	// Called every frame
