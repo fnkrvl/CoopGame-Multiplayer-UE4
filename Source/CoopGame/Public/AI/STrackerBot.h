@@ -84,12 +84,20 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category= "TrackerBot")
 	USoundCue* ExplosionSound;
-	
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+
+protected:
+
+	// CHALLENGE CODE	
+
+	// Find nearby enemies and grow in 'power level' based on the amount.
+	void OnCheckNearbyBots();
 	
+	// The power boost of the bot, affects damaged caused to enemies and color of the bot (range: 1 to 4)
+	int32 PowerLevel;
 };
