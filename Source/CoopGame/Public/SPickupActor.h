@@ -34,7 +34,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category= "PickupActor")
 	TSubclassOf<ASPowerupActor> PowerUpClass;
 
-	UPROPERTY(EditDefaultsOnly, Category= "PickupActor")
+	UPROPERTY()
 	ASPowerupActor* PowerUpInstance;
 
 	UPROPERTY(EditDefaultsOnly, Category= "PickupActor")
