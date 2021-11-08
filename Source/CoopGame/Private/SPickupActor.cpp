@@ -16,6 +16,8 @@ ASPickupActor::ASPickupActor()
 	DecalComp->DecalSize = FVector(64, 75, 75);
 	DecalComp->SetupAttachment(RootComponent);
 
+	CooldownDuration = 10.0f;
+
 }
 
 // Called when the game starts or when spawned
