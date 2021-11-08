@@ -3,6 +3,7 @@
 
 #include "SPickupActor.h"
 #include "Components/DecalComponent.h"
+#include "SPowerupActor.h"
 
 // Sets default values
 ASPickupActor::ASPickupActor()
@@ -39,7 +40,7 @@ void ASPickupActor::Respawn()
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-	GetWorld()->SpawnActor<ASPowerupActor>(PowerUpClass, GetTransform(), SpawnParams);
+	PowerUpInstance = GetWorld()->SpawnActor<ASPowerupActor>(PowerUpClass, GetTransform(), SpawnParams);
 }
 
 void ASPickupActor::NotifyActorBeginOverlap(AActor* OtherActor)

@@ -15,25 +15,21 @@ ASPowerupActor::ASPowerupActor()
 void ASPowerupActor::BeginPlay()
 {
 	Super::BeginPlay();
-
 	
 }
 
 void ASPowerupActor::OnTickPowerup()
 {
+	TicksProcessed ++;
+	OnPowerupTicked();
+	
 	if (TicksProcessed >= TotalNroOfTicks)
 	{
 		OnExpired();
 
 		// Delete timer
 		GetWorldTimerManager().ClearTimer(TimerHandle_PowerupTick);
-
-		return;
 	}
-
-	TicksProcessed ++;
-
-	OnPowerupTicked();
 }
 
 void ASPowerupActor::ActivatePowerup()
