@@ -29,14 +29,13 @@ void ASGameMode::EndWave()
 }
 
 void ASGameMode::PrepareForNextWave()
-{
-	
+{	
 	GetWorldTimerManager().SetTimer(TimerHandle_NextWaveStart, this, &ASGameMode::StartWave, TimeBetweenWaves, false);
 }
 
 void ASGameMode::CheckWaveState()
 {
-	bool bIPreparingForWave = GetWorldTimerManager().IsTimerActive(TimerHandle_NextWaveStart);
+	const bool bIPreparingForWave = GetWorldTimerManager().IsTimerActive(TimerHandle_NextWaveStart);
 	
 	if (NroOfBotsToSpawn > 0 || bIPreparingForWave)
 	{
@@ -74,7 +73,7 @@ void ASGameMode::CheckAnyPlayerAlive()
 		APlayerController* PC = It->Get();
 		if (PC && PC->GetPawn())
 		{
-			APawn* MyPawn = PC->GetPawn();
+			const APawn* MyPawn = PC->GetPawn();
 			USHealthComponent* HealthComp = Cast<USHealthComponent>(MyPawn->GetComponentByClass(USHealthComponent::StaticClass()));
 			if (ensure(HealthComp) && HealthComp->GetHealth() > 0.0F)
 			{
@@ -93,8 +92,8 @@ void ASGameMode::GameOver()
 {
 	EndWave();
 
-	// @TODO: Finisih up the match, present 'game over' to players
-
+	// @TODO: Finish up the match, present 'game over' to players
+	
 	UE_LOG(LogTemp, Warning, TEXT("GAME OVER! Players Died!"))
 }
 
