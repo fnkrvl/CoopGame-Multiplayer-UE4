@@ -52,7 +52,7 @@ protected:
 
 	void GameOver();
 
-	void SetWaveState(EWaveState NewState);
+	void SetWaveState(EWaveState NewState) const;
 
 public:
 
