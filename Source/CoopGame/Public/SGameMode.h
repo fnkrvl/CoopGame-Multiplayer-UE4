@@ -57,6 +57,8 @@ protected:
 
 	void SetWaveState(EWaveState NewState) const;
 
+	void RestartDeadPlayers();
+
 public:
 
 	ASGameMode();
