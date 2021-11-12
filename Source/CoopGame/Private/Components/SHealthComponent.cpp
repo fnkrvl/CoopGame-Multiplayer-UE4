@@ -110,7 +110,7 @@ bool USHealthComponent::IsFriendly(AActor* ActorA, AActor* ActorB)
 		return  true;
 	}
 
-	return  HealthCompA->TeamNum == HealthCompB->TeamNum;	
+	return  HealthCompA->TeamNum == HealthCompB->TeamNum;
 }
 
 
