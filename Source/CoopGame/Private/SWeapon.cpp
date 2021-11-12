@@ -10,7 +10,7 @@
 #include "Net/UnrealNetwork.h"
 
 static int32 DebugWeaponDrawing = 0;
-FAutoConsoleVariableRef CVARDebugWeaponDrawing(
+FAutoConsoleVariableRef CVarCVARDebugWeaponDrawing(
 	TEXT("COOP.DebugWeapons"),
 	DebugWeaponDrawing,
 	TEXT("Draw Debug Lines for Weapons"),
