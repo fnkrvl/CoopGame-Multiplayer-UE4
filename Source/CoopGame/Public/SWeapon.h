@@ -25,8 +25,6 @@ public:
 	FVector_NetQuantize TraceTo;
 };
 
-
-
 UCLASS()
 class COOPGAME_API ASWeapon : public AActor
 {
@@ -90,6 +88,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category= "Weapon")
 	float RateOfFire;
 
+	/* Bullet spread in Degree */
+	UPROPERTY(EditDefaultsOnly, Category= "Weapon", meta = (ClampMin=0.0f))
+	float BulletSpread;
+	
 	// Derived from RateOfFire
 	float TimeBetweenShots;
 
